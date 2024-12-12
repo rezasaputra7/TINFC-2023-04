@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pemesanan</title>
+    <script src="jquery-3.7.1.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-image: url('background.jpg'); /* Ganti 'background.jpg' sesuai lokasi gambar */
+            background-size: cover;
+            background-position: center;
+            color: #fff; /* Pastikan teks terlihat di atas gambar */
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-buttons {
+            margin-top: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparan untuk kontras dengan latar belakang */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Pemesanan</h1>
+    <form id="formPemesanan">
+        <div class="form-group">
+            <label for="tanggalPesan">Tanggal Pesan:</label>
+            <input type="date" id="tanggalPesan" required>
+        </div>
+        <div class="form-group">
+            <label for="namaPemesan">Nama Pemesan:</label>
+            <input type="text" id="namaPemesan" required>
+        </div>
+        <div class="form-group">
+            <label for="jenisKelamin">Jenis Kelamin:</label>
+            <select id="jenisKelamin" required>
+                <option value="">-- Pilih --</option>
+                <option value="Laki-Laki">Laki-Laki</option>
+                <option value="Perempuan">Perempuan</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nomorIdentitas">Nomor Identitas:</label>
+            <input type="text" id="nomorIdentitas" maxlength="16" required>
+        </div>
+        <div class="form-group">
+            <label for="tipeKamar">Tipe Kamar:</label>
+            <select id="tipeKamar" required>
+                <option value="">-- Pilih --</option>
+                <option value="500000">Standard (500.000)</option>
+                <option value="700000">Deluxe (700.000)</option>
+                <option value="1000000">Family (1.000.000)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="durasiMenginap">Durasi Menginap (hari):</label>
+            <input type="number" id="durasiMenginap" required>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" id="termasukBreakfast"> Termasuk Breakfast (+80.000)
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="totalBayar">Total Bayar:</label>
+            <input type="text" id="totalBayar" readonly>
+        </div>
+        <div class="form-buttons">
+            <button type="button" id="btnSimpan">Simpan</button>
+            <button type="reset">Batal</button>
+        </div>
+    </form>
+    <script>
+        $(document).ready(function () {
+            // Hitung Total Bayar
+            $('#durasiMenginap, #tipeKamar, #termasukBreakfast').on('change', function () {
+                const tipeKamar = parseInt($('#tipeKamar').val()) || 0;
+                const durasi = parseInt($('#durasiMenginap').val()) || 0;
+                const breakfast = $('#termasukBreakfast').is(':checked') ? 80000 : 0;
+
+                let total = tipeKamar * durasi + breakfast;
+
+                // Diskon jika durasi menginap > 3 hari
+                if (durasi > 3) {
+                    total *= 0.9;
+                }
+
+                $('#totalBayar').val(total.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' }));
+            });
+
+            // Validasi dan Simpan Data
+            $('#btnSimpan').on('click', function () {
+                const tanggalPesan = $('#tanggalPesan').val();
+                const namaPemesan = $('#namaPemesan').val();
+                const jenisKelamin = $('#jenisKelamin').val();
+                const nomorIdentitas = $('#nomorIdentitas').val();
+                const tipeKamar = $('#tipeKamar option:selected').text();
+                const durasiMenginap = $('#durasiMenginap').val();
+                const totalBayar = $('#totalBayar').val();
+                const breakfast = $('#termasukBreakfast').is(':checked') ? 'Ya' : 'Tidak';
+
+                // Validasi nomor identitas
+                if (nomorIdentitas.length !== 16 || isNaN(nomorIdentitas)) {
+                    alert("Nomor Identitas harus 16 digit.");
+                    return;
+                }
+
+                // Validasi tanggal pemesanan
+                if (!tanggalPesan) {
+                    alert("Tanggal Pemesanan harus diisi.");
+                    return;
+                }
+
+                // Tampilkan hasil
+                alert(`Tanggal Pemesanan: ${tanggalPesan}
+Nama Pemesan: ${namaPemesan}
+Jenis Kelamin: ${jenisKelamin}
+Nomor Identitas: ${nomorIdentitas}
+Tipe Kamar: ${tipeKamar}
+Durasi Menginap: ${durasiMenginap} hari
+Termasuk Breakfast: ${breakfast}
+Total Bayar: ${totalBayar}`);
+            });
+        });
+    </script>
+</body>
+</html>

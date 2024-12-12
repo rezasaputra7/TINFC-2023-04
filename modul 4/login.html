@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script>
+        function login() {
+            // Ambil nilai dari input username dan password
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Validasi username dan password
+            if (username === "admin" && password === "123") {
+                alert("Login sukses!");
+                window.location.href = "index.html"; // Arahkan ke index.html
+            } else {
+                alert("Login gagal!");
+                window.location.href = "login.html"; // Tetap di login.html
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Form Login</h1>
+    <form onsubmit="event.preventDefault(); login();">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+

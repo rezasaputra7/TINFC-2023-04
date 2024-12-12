@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Tab Switcher</title>
+    <!-- File jQuery -->
+    <script src="jquery-3.7.1.js"></script>
+    <style>
+        .tab {
+            display: none; /* Sembunyikan semua tab secara default */
+        }
+        .tab-button {
+            cursor: pointer;
+            padding: 10px;
+            background-color: aqua;
+            border: 1px solid;
+            display: inline-block;
+        }
+        .active {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tugas Web Developer</h1>
+
+    <!-- Tombol untuk memilih tab -->
+    <div>
+        <div class="tab-button active" data-tab="tab1">Tab 1</div>
+        <div class="tab-button" data-tab="tab2">Tab 2</div>
+        <div class="tab-button" data-tab="tab3">Tab 3</div>
+    </div>
+
+    <!-- Konten Tab -->
+    <div id="tab1" class="tab" style="display: block;">
+        <h2>Front-End Developer</h2>
+        <p>Mengoptimalkan Fungsi Aplikasi Berdasarkan User Interface (UI) dan User Experience (UX).</p>
+    </div>
+    <div id="tab2" class="tab">
+        <h2>Back-End Developer</h2>
+        <p>Berjalan di sisi server dengan mengelola data menjadi informasi dari database.</p>
+    </div>
+    <div id="tab3" class="tab">
+        <h2>Full-Stack Developer</h2>
+        <p>Memiliki kemampuan di kedua sisi, yaitu front-end dan back-end, sehingga dapat menangani semua aspek pengembangan web.</p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Tampilkan konten tab yang sesuai saat tombol tab diklik
+            $(".tab-button").click(function () {
+                // Sembunyikan semua tab
+                $(".tab").hide();
+
+                // Hapus kelas "active" dari semua tombol
+                $(".tab-button").removeClass("active");
+
+                // Tampilkan tab yang sesuai berdasarkan data-tab
+                var tabToShow = $(this).data("tab");
+                $("#" + tabToShow).show();
+
+                // Tambahkan kelas "active" ke tombol yang diklik
+                $(this).addClass("active");
+            });
+        });
+    </script>
+</body>
+</html>

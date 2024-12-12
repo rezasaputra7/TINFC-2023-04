@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menampilkan dan Menyembunyikan Gambar</title>
+  <script src="JS/jquery-3.7.1.min.js"></script>
+  <style>
+    #gambar {
+      width: 300px;
+      height: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+    <h1>Menampilkan dan Menyembunyikan Gambar</h1>
+  <button id="tampilkan">Tampilkan Gambar</button>
+  <button id="sembunyikan">Sembunyikan Gambar</button>
+  
+  <img id="gambar" src="https://via.placeholder.com/300" alt="Contoh Gambar" style="display: none;">
+
+  <script>
+    $(document).ready(function() {
+      // Menampilkan gambar
+      $('#tampilkan').click(function() {
+        $('#gambar').fadeIn(); // Menampilkan gambar dengan efek fade-in
+      });
+
+      // Menyembunyikan gambar
+      $('#sembunyikan').click(function() {
+        $('#gambar').fadeOut(); // Menyembunyikan gambar dengan efek fade-out
+      });
+    });
+  </script>
+</body>
+</html>

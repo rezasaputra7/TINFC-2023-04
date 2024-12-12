@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tambah Data</title>
+    <script>
+        // Fungsi validasi untuk form tambah data kamar
+        function validateRoomForm(event) {
+            event.preventDefault(); // Mencegah form submit default
+            const roomNumber = document.getElementById("roomNumber").value;
+            const roomType = document.getElementById("roomType").value;
+            const roomPrice = document.getElementById("roomPrice").value;
+
+            if (roomNumber === "" || roomType === "" || roomPrice === "") {
+                alert("Semua data kamar harus diisi!");
+                return false;
+            }
+            if (isNaN(roomPrice) || roomPrice <= 0) {
+                alert("Harga kamar harus berupa angka positif!");
+                return false;
+            }
+            alert("Data kamar berhasil ditambahkan!");
+            return true;
+        }
+
+        // Fungsi validasi untuk form tambah data fasilitas
+        function validateFacilityForm(event) {
+            event.preventDefault(); // Mencegah form submit default
+            const facilityName = document.getElementById("facilityName").value;
+            const facilityDescription = document.getElementById("facilityDescription").value;
+
+            if (facilityName === "" || facilityDescription === "") {
+                alert("Nama dan deskripsi fasilitas harus diisi!");
+                return false;
+            }
+            alert("Data fasilitas berhasil ditambahkan!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Form Tambah Data</h1>
+
+    <!-- Form Tambah Data Kamar -->
+    <h2>Tambah Data Kamar</h2>
+    <form onsubmit="return validateRoomForm(event);">
+        <label for="roomNumber">Nomor Kamar:</label><br>
+        <input type="text" id="roomNumber" name="roomNumber" required><br><br>
+        <label for="roomType">Tipe Kamar:</label><br>
+        <input type="text" id="roomType" name="roomType" required><br><br>
+        <label for="roomPrice">Harga Kamar (Rp):</label><br>
+        <input type="number" id="roomPrice" name="roomPrice" required><br><br>
+        <button type="submit">Tambah Kamar</button>
+    </form>
+
+    <hr>
+
+    <!-- Form Tambah Data Fasilitas -->
+    <h2>Tambah Data Fasilitas</h2>
+    <form onsubmit="return validateFacilityForm(event);">
+        <label for="facilityName">Nama Fasilitas:</label><br>
+        <input type="text" id="facilityName" name="facilityName" required><br><br>
+        <label for="facilityDescription">Deskripsi Fasilitas:</label><br>
+        <textarea id="facilityDescription" name="facilityDescription" required></textarea><br><br>
+        <button type="submit">Tambah Fasilitas</button>
+    </form>
+</body>
+</html>

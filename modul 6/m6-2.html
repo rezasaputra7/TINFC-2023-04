@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Demo</title>
+    <!-- Include file jQuery -->
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Fade Out
+            $(".fadeOut").click(function () {
+                $("img").fadeOut();
+            });
+
+            // Fade In
+            $(".fadeIn").click(function () {
+                $("img").fadeIn();
+            });
+
+            // Fade Toggle
+            $(".fadeToggle").click(function () {
+                $("img").fadeToggle();
+                $("img").css("background-color", "orange");
+            });
+
+            // Fade To
+            $(".fadeto").click(function () {
+                $("img").fadeTo("slow", 0.5);
+                $("img").css("background-color", "lightpink");
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Tombol untuk kontrol efek -->
+    <button class="fadeOut" style="background-color: aqua;">Fade Out</button>
+    <button class="fadeIn" style="background-color: blanchedalmond;">Fade In</button>
+    <button class="fadeToggle" style="background-color: blue;">Fade Toggle</button>
+    <button class="fadeto" style="background-color: blueviolet;">Fade To</button>
+    <br />
+    <!-- Gambar -->
+    <img src="logo Prodi TI.png" alt="Placeholder Image" style="margin-top: 100px;" />
+</body>
+</html>

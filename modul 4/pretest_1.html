@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="validateLogin(event)">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+
+        <button type="submit">Login</button>
+        <p id="message" class="message"></p>
+    </form>
+</div>
+
+<script>
+    function validateLogin(event) {
+        event.preventDefault(); // Mencegah halaman refresh saat submit form
+        
+        // Mendapatkan nilai input dari username dan password
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const message = document.getElementById("message");
+        
+        // Mengatur username dan password yang benar untuk validasi
+        const correctUsername = "admin";
+        const correctPassword = "12345";
+        
+        // Reset pesan dan kelas warna
+        message.textContent = "";
+        message.classList.remove("success", "error");
+
+        // Validasi input tidak boleh kosong
+        if (username === "" || password === "") {
+            message.textContent = "Username dan password tidak boleh kosong!";
+            message.classList.add("error");
+        } else if (username === correctUsername && password === correctPassword) {
+            message.textContent = "Login berhasil!";
+            message.classList.add("success");
+        } else {
+            message.textContent = "Login gagal!";
+            message.classList.add("error");
+        }
+    }
+</script>
+
+</body>
+</html>
